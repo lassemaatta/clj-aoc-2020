@@ -5,8 +5,6 @@
 
 (def sample-data "35\n20\n15\n25\n47\n40\n62\n55\n65\n95\n102\n117\n150\n182\n127\n219\n299\n277\n309\n576")
 
-(set! *warn-on-reflection* true)
-
 (def queue PersistentQueue/EMPTY)
 
 ; From JoC
@@ -22,14 +20,14 @@
        (mapv #(Long/parseLong %))))
 
 (defn find-abnormal
-  [values len]
+  [values ^long len]
   (reduce
     (fn [q v]
       (if (< (count q) len)
         (conj q v)
         (let [candidates (sort q)
-              pairs      (for [x candidates
-                               y candidates
+              pairs      (for [^long x candidates
+                               ^long y candidates
                                :while (> x y)
                                :when (= v (+ x y))]
                            [x y])]
@@ -42,12 +40,12 @@
     values))
 
 (defn find-results
-  [values sum]
+  [values ^long sum]
   (let [cnt (count values)]
-    (for [start (range cnt)
-          end   (range (inc start) cnt)
-          :let [scope  (subvec values start end)
-                result (apply + scope)]
+    (for [^long start (range cnt)
+          ^long end   (range (inc start) cnt)
+          :let [scope        (subvec values start end)
+                ^long result (apply + scope)]
           :while (and (>= end start)
                       (<= result sum))
           :when (= sum result)]

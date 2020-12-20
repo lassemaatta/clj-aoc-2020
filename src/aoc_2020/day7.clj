@@ -45,7 +45,7 @@ dark violet bags contain no other bags.")
 
 (defn reverse-edges
   [edges]
-  (mapv (fn [[src dst cnt]]
+  (mapv (fn [[src dst ^long cnt]]
           [dst src (/ 1 cnt)])
         edges))
 
@@ -97,15 +97,16 @@ dark violet bags contain no other bags.")
       (count)))
 
 (defn count-children*
-  [g node]
+  ^long [g node]
   (let [children (get g node)]
     (if (empty? children)
       1
-      (inc (reduce
-             (fn [sum [node cnt]]
-               (+ sum (* cnt (count-children* g node))))
-             0
-             children)))))
+      (let [^long child-count (reduce
+                                (fn [^long sum [node ^long cnt]]
+                                  (+ sum (* cnt (count-children* g node))))
+                                0
+                                children)]
+        (inc child-count)))))
 
 (defn count-children
   [data node]

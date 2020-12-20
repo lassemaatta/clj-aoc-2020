@@ -13,24 +13,24 @@
 
 (defn find-two-entries
   [data]
-  (let [vals (input->nums data)
-        matches (for [x vals
-                      y vals
+  (let [vals    (input->nums data)
+        matches (for [^long x vals
+                      ^long y vals
                       :while (> x y)
                       :when (= 2020 (+ x y))]
                   [x y])]
-    (mapv (fn [[x y]] (* x y)) matches)))
+    (mapv (fn [[^long x ^long y]] (* x y)) matches)))
 
 (defn find-three-entries
   [data]
-  (let [vals (input->nums data)
-        matches (for [x vals
-                      y vals
-                      z vals
+  (let [vals    (input->nums data)
+        matches (for [^long x vals
+                      ^long y vals
+                      ^long z vals
                       :while (> x y z)
                       :when (= 2020 (+ x y z))]
                   [x y z])]
-    (mapv (fn [[x y z]] (* x y z)) matches)))
+    (mapv (fn [[^long x ^long y ^long z]] (* x y z)) matches)))
 
 (comment
   (find-two-entries sample-data)

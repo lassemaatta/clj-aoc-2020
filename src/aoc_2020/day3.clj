@@ -21,10 +21,10 @@
     (get-in area [y x1])))
 
 (defn path
-  [step-x step-y]
+  [^long step-x ^long step-y]
   (->> (range)
-       (map (fn [v] [(* step-x v)
-                     (* step-y v)]))))
+       (map (fn [^long v] [(* step-x v)
+                           (* step-y v)]))))
 
 (defn make-path
   [area [step-x step-y]]

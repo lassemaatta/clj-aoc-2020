@@ -25,7 +25,7 @@
                                    policy-1-password?))
 
 (defn policy-2-password?
-  [{::keys [min max char password]}]
+  [{::keys [^long min ^long max char password]}]
   (let [a (= char (get password (dec min)))
         b (= char (get password (dec max)))]
     (not= a b)))
@@ -38,14 +38,14 @@
        (str/split-lines)
        (map (fn [line]
               (let [[_ min max char password] (re-find #"(\d+)-(\d+) (\w): (\w+)" line)]
-                {::min (Long/parseLong min)
-                 ::max (Long/parseLong max)
-                 ::char (first char)
+                {::min      (Long/parseLong min)
+                 ::max      (Long/parseLong max)
+                 ::char     (first char)
                  ::password password})))))
 
 (defn count-valid
   [input policy]
-  (let [rows (input->fields input)
+  (let [rows      (input->fields input)
         is-valid? #(s/valid? policy %)]
     (count (filter is-valid? rows))))
 

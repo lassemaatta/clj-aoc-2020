@@ -51,7 +51,7 @@
 (defn run-trace
   [trace]
   (reduce
-    (fn [{:keys [visited] :as m} {:keys [pc cmds] :as ctx}]
+    (fn [{:keys [visited] :as m} {:keys [^long pc cmds] :as ctx}]
       (if (>= pc (count cmds))
         (reduced (assoc ctx :result :finished))
         (if (contains? visited pc)
@@ -74,13 +74,13 @@
   (some? ((set (keys substitutions)) op)))
 
 (defn find-next-alterable
-  [cmds start-idx]
+  [cmds ^long start-idx]
   (let [cmds-to-search (subvec cmds start-idx)]
-    (if-let [idx (->> cmds-to-search
-                      (map-indexed vector)
-                      (filter (fn [[_idx cmd]] (can-alter? cmd)))
-                      (take 1)
-                      (ffirst))]
+    (if-let [^long idx (->> cmds-to-search
+                            (map-indexed vector)
+                            (filter (fn [[_idx cmd]] (can-alter? cmd)))
+                            (take 1)
+                            (ffirst))]
       (+ start-idx idx)
       nil)))
 
@@ -92,7 +92,7 @@
   [{:keys [original idx result] :as trace-ctx}]
   (if (some? result)
     nil
-    (if-let [next-idx (find-next-alterable original idx)]
+    (if-let [next-idx ^long (find-next-alterable original idx)]
       (assoc trace-ctx :cmds (update original next-idx alter-cmd)
                        :idx (inc next-idx))
       (assoc trace-ctx :result :finished))))

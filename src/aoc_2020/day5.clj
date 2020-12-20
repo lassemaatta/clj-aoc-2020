@@ -38,7 +38,7 @@
          (map :seat)
          (sort)
          (reduce
-           (fn [previous seat]
+           (fn [^long previous ^long seat]
              (if (= (+ previous 2) seat)
                (reduced (dec seat))
                seat))
