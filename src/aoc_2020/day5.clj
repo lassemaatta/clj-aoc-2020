@@ -1,8 +1,5 @@
 (ns aoc-2020.day5
-  (:require [clojure.string :as str]
-            [clojure.java.io :as io]))
-
-(def sample-data "BFFFBBFRRR\nFFFBBBFRRR\nBBFFBBFRLL")
+  (:require [clojure.string :as str]))
 
 (def token->bit {\B "1"
                  \F "0"
@@ -43,9 +40,3 @@
                (reduced (dec seat))
                seat))
            -1))))
-
-(comment
-  (max-seat sample-data)
-  (max-seat (slurp (io/resource "day5.txt")))
-  (find-seat (slurp (io/resource "day5.txt"))))
-

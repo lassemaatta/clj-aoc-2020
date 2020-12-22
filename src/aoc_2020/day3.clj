@@ -1,8 +1,5 @@
 (ns aoc-2020.day3
-  (:require [clojure.string :as str]
-            [clojure.java.io :as io]))
-
-(def sample-data "..##.......\n#...#...#..\n.#....#..#.\n..#.#...#.#\n.#...##..#.\n..#.##.....\n.#.#.#....#\n.#........#\n#.##...#...\n#...##....#\n.#..#...#.#")
+  (:require [clojure.string :as str]))
 
 (def input-map {\. false
                 \# true})
@@ -56,10 +53,3 @@
                     (map #(make-path area %))
                     (map #(count-trees area %)))]
     (apply * trees)))
-
-(comment
-  (problem-1 sample-data)
-  (problem-1 (slurp (io/resource "day3.txt")))
-
-  (problem-2 sample-data)
-  (problem-2 (slurp (io/resource "day3.txt"))))

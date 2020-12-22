@@ -1,9 +1,6 @@
 (ns aoc-2020.day6
   (:require [clojure.string :as str]
-            [clojure.java.io :as io]
             [clojure.set :as set]))
-
-(def sample-data "abc\n\na\nb\nc\n\nab\nac\n\na\na\na\na\n\nb")
 
 (def empty-pending {:rows []})
 
@@ -51,10 +48,3 @@
   (->> input
        (input->answers)
        (sum-answer-counts selector)))
-
-(comment
-  (let [large-sample (slurp (io/resource "day6.txt"))]
-    [(parse-and-count sample-data :any)
-     (parse-and-count large-sample :any)
-     (parse-and-count sample-data :all)
-     (parse-and-count large-sample :all)]))

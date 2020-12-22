@@ -1,11 +1,6 @@
 (ns aoc-2020.day10
-  (:require [clojure.string :as str]
-            [clojure.java.io :as io])
+  (:require [clojure.string :as str])
   (:import (clojure.lang PersistentQueue)))
-
-(def sample-data-1 "16\n10\n15\n5\n1\n11\n7\n19\n6\n12\n4")
-
-(def sample-data-2 "28\n33\n18\n42\n31\n14\n46\n20\n48\n47\n24\n23\n49\n45\n19\n38\n39\n11\n1\n32\n25\n35\n8\n17\n7\n9\n4\n2\n34\n10\n3")
 
 (def queue PersistentQueue/EMPTY)
 
@@ -74,12 +69,3 @@
                         :paths 1}))
          (last)
          (:paths))))
-
-(comment
-  (->> (input->vals sample-data-1)
-       (calculate-differences))
-  (->> (input->vals sample-data-2)
-       (calculate-differences))
-  (let [data (slurp (io/resource "day10.txt"))]
-    (task-1 data)
-    (calculate-paths data)))

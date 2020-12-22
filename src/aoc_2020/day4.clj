@@ -1,9 +1,6 @@
 (ns aoc-2020.day4
   (:require [clojure.string :as str]
-            [clojure.java.io :as io]
             [clojure.spec.alpha :as s]))
-
-(def sample-data "ecl:gry pid:860033327 eyr:2020 hcl:#fffffd\nbyr:1937 iyr:2017 cid:147 hgt:183cm\n\niyr:2013 ecl:amb cid:350 eyr:2023 pid:028048884\nhcl:#cfa07d byr:1929\n\nhcl:#ae17e1 iyr:2013\neyr:2024\necl:brn pid:760753108 byr:1931\nhgt:179cm\n\nhcl:#cfa07d eyr:2025 pid:166559648\niyr:2011 ecl:brn hgt:59in")
 
 (s/def ::byr-simple string?)
 (s/def ::iyr-simple string?)
@@ -130,11 +127,3 @@
   [data spec]
   (->> (extract-passports data spec)
        (count)))
-
-(comment
-  (let [spec ::simple]
-    [(count-valid sample-data spec)
-     (count-valid (slurp (io/resource "day4.txt")) spec)])
-  (let [spec ::strict]
-    [(count-valid sample-data spec)
-     (count-valid (slurp (io/resource "day4.txt")) spec)]))

@@ -1,8 +1,5 @@
 (ns aoc-2020.day1
-  (:require [clojure.java.io :as io]
-            [clojure.string :as str]))
-
-(def sample-data "1721\n979\n366\n299\n675\n1456")
+  (:require [clojure.string :as str]))
 
 (defn- input->nums
   [input]
@@ -19,7 +16,9 @@
                       :while (> x y)
                       :when (= 2020 (+ x y))]
                   [x y])]
-    (mapv (fn [[^long x ^long y]] (* x y)) matches)))
+    (->> matches
+         (map (fn [[^long x ^long y]] (* x y)))
+         (first))))
 
 (defn find-three-entries
   [data]
@@ -30,11 +29,6 @@
                       :while (> x y z)
                       :when (= 2020 (+ x y z))]
                   [x y z])]
-    (mapv (fn [[^long x ^long y ^long z]] (* x y z)) matches)))
-
-(comment
-  (find-two-entries sample-data)
-  (find-two-entries (slurp (io/resource "day1.txt")))
-
-  (find-three-entries sample-data)
-  (find-three-entries (slurp (io/resource "day1.txt"))))
+    (->> matches
+         (map (fn [[^long x ^long y ^long z]] (* x y z)))
+         (first))))

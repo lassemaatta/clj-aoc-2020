@@ -1,8 +1,5 @@
 (ns aoc-2020.day11
-  (:require [clojure.string :as str]
-            [clojure.java.io :as io]))
-
-(def sample-data "L.LL.LL.LL\nLLLLLLL.LL\nL.L.L..L..\nLLLL.LL.LL\nL.LL.LL.LL\nL.LLLLL.LL\n..L.L.....\nLLLLLLLLLL\nL.LLLLLL.L\nL.LLLLL.LL")
+  (:require [clojure.string :as str]))
 
 (defn- input->vals
   [input]
@@ -150,20 +147,23 @@
        (mapcat identity)
        (frequencies)))
 
-(comment
-  (let [data sample-data
-        ctx  {:max-occupied 4
-              :max-length   1}]
-    (-> data
-        (input->vals)
-        (apply-ctx ctx)
-        (iterate-until-stabilized)
-        (count-seats)))
-  (let [data (slurp (io/resource "day11.txt"))
-        ctx  {:max-occupied 5
-              :max-length   100}]
-    (-> data
-        (input->vals)
-        (apply-ctx ctx)
-        (iterate-until-stabilized)
-        (count-seats))))
+(defn count-occupied
+  [data ctx]
+  (-> data
+      (input->vals)
+      (apply-ctx ctx)
+      (iterate-until-stabilized)
+      (count-seats)
+      (get occupied-seat)))
+
+(defn task-1
+  [data]
+  (let [ctx {:max-occupied 4
+             :max-length   1}]
+    (count-occupied data ctx)))
+
+(defn task-2
+  [data]
+  (let [ctx {:max-occupied 5
+             :max-length   100}]
+    (count-occupied data ctx)))

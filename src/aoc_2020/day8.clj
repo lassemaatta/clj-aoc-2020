@@ -1,8 +1,5 @@
 (ns aoc-2020.day8
-  (:require [clojure.string :as str]
-            [clojure.java.io :as io]))
-
-(def sample-data "nop +0\nacc +1\njmp +4\nacc +3\njmp -3\nacc -99\nacc +1\njmp -4\nacc +6")
+  (:require [clojure.string :as str]))
 
 (defn- input->commands
   [input]
@@ -115,10 +112,3 @@
        (filter #(= :finished (:result %)))
        (take 1)
        (first)))
-
-(comment
-  (let [large-data (slurp (io/resource "day8.txt"))]
-    [(-> (run-until-loop large-data)
-         (select-keys [:result :accum]))
-     (-> (run-traces large-data)
-         (select-keys [:result :accum]))]))

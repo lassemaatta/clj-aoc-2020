@@ -1,9 +1,6 @@
 (ns aoc-2020.day9
-  (:require [clojure.string :as str]
-            [clojure.java.io :as io])
+  (:require [clojure.string :as str])
   (:import (clojure.lang PersistentQueue)))
-
-(def sample-data "35\n20\n15\n25\n47\n40\n62\n55\n65\n95\n102\n117\n150\n182\n127\n219\n299\n277\n309\n576")
 
 (def queue PersistentQueue/EMPTY)
 
@@ -63,16 +60,12 @@
        (first)
        (apply +)))
 
-(comment
-  (let [data sample-data
-        len  5]
-    [(-> (input->vals data)
-         (find-abnormal len))
-     (-> (input->vals data)
-         (find-sum 127))])
-  (let [data (slurp (io/resource "day9.txt"))
-        len  25]
-    [(-> (input->vals data)
-         (find-abnormal len))                               ;
-     (-> (input->vals data)
-         (find-sum 1504371145))]))
+(defn problem-1
+  [data len]
+  (-> (input->vals data)
+      (find-abnormal len)))
+
+(defn problem-2
+  [data target]
+  (-> (input->vals data)
+      (find-sum target)))

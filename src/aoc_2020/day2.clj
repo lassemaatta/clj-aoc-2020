@@ -1,9 +1,6 @@
 (ns aoc-2020.day2
   (:require [clojure.string :as str]
-            [clojure.java.io :as io]
             [clojure.spec.alpha :as s]))
-
-(def sample-data "1-3 a: abcde\n1-3 b: cdefg\n2-9 c: ccccccccc")
 
 (s/def ::min number?)
 (s/def ::max number?)
@@ -48,11 +45,3 @@
   (let [rows      (input->fields input)
         is-valid? #(s/valid? policy %)]
     (count (filter is-valid? rows))))
-
-(comment
-  (count-valid sample-data ::valid-policy-1-row)
-  (count-valid (slurp (io/resource "day2.txt")) ::valid-policy-1-row)
-
-  (count-valid sample-data ::valid-policy-2-row)
-  (count-valid (slurp (io/resource "day2.txt")) ::valid-policy-2-row))
-
