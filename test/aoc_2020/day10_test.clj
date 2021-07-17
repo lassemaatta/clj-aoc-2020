@@ -1,5 +1,5 @@
 (ns aoc-2020.day10-test
-  (:require [clojure.test :refer :all]
+  (:require [clojure.test :refer [deftest testing is]]
             [clojure.java.io :as io]
             [aoc-2020.day10 :as tasks]))
 
