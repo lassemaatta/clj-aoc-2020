@@ -1,5 +1,6 @@
 (ns aoc-2020.day11
-  (:require [clojure.string :as str]))
+  (:require
+   [clojure.string :as str]))
 
 (defn- input->vals
   [input]
